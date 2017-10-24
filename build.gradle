@@ -3,18 +3,36 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:3.0.0-rc2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
+ext {
+    supportLib = "26.1.0"
+    dagger = "2.11"
+    retrofit = "2.3.0"
+    arch = "1.0.0-rc1"
+    timber = "4.5.1"
+    rxjava = "2.1.5"
+    rxandroid = "2.0.1"
+}
+
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 

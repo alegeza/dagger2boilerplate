@@ -2,12 +2,8 @@ package com.alexfcmkh.dagger2boilerplate.data.repository;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface IBaseRepository<T> {
-
-
-    Observable<List<T>> getAllData();
-
-
+    Single<List<T>> getAllData();
 }

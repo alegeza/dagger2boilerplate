@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class UsersRepository implements IBaseRepository<UserModel> {
 
@@ -19,7 +19,7 @@ public class UsersRepository implements IBaseRepository<UserModel> {
     }
 
     @Override
-    public Observable<List<UserModel>> getAllData() {
+    public Single<List<UserModel>> getAllData() {
         return api.loadUsers();
     }
 }

@@ -1,31 +1,37 @@
 package com.alexfcmkh.dagger2boilerplate;
 
+import android.app.Activity;
 import android.app.Application;
 
-import com.alexfcmkh.dagger2boilerplate.di.component.AppComponent;
 import com.alexfcmkh.dagger2boilerplate.di.component.DaggerAppComponent;
-import com.alexfcmkh.dagger2boilerplate.di.module.AppModule;
-import com.alexfcmkh.dagger2boilerplate.di.module.RetrofitModule;
 
-public class MyApplication extends Application {
+import javax.inject.Inject;
 
-    AppComponent appComponent;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+import timber.log.Timber;
+
+public class MyApplication extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        Timber.plant(new Timber.DebugTree());
 
-        appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .retrofitModule(new RetrofitModule("https://jsonplaceholder.typicode.com"))
-                .build();
-
-        appComponent.inject(this);
-
+        DaggerAppComponent
+                .builder()
+                .context(this)
+                .build()
+                .inject(this);
     }
 
-    public AppComponent getAppComponent() {
-        return appComponent;
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 }

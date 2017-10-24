@@ -1,23 +1,32 @@
 package com.alexfcmkh.dagger2boilerplate.di.module;
 
-import android.content.Context;
+import com.alexfcmkh.dagger2boilerplate.data.retrofit.UserApi;
 
-import com.alexfcmkh.dagger2boilerplate.MyApplication;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.android.support.AndroidSupportInjectionModule;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
+@Module(includes = {ViewModelModule.class, AndroidSupportInjectionModule.class})
 public class AppModule {
 
-    private MyApplication app;
-
-    public AppModule(MyApplication app) {
-        this.app = app;
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit() {
+        return new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     @Provides
-    Context provideContext() {
-        return this.app;
+    @Singleton
+    UserApi provideUserApi(Retrofit retrofit) {
+        return retrofit.create(UserApi.class);
     }
 }

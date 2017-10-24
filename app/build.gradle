@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.alexfcmkh.dagger2boilerplate"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,28 +20,33 @@ android {
     lintOptions {
         abortOnError false
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.google.code.findbugs'
-
-    })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${rootProject.supportLib}"
     testCompile 'junit:junit:4.12'
-
-    /** DAGGER 2**/
-    compile "com.google.dagger:dagger:2.7"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.7"
-    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
-
+    /** Dagger 2**/
+    implementation "com.google.dagger:dagger:${rootProject.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.dagger}"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    /**Dagger-Android**/
+    implementation "com.google.dagger:dagger-android:${rootProject.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${rootProject.dagger}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${rootProject.dagger}"
     /**RxJava**/
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-
-
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxandroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxjava}"
+    /** Retrofit - Networking **/
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
+    /** Timber - library for logging **/
+    implementation "com.jakewharton.timber:timber:${rootProject.timber}"
+    /** lifecycle components **/
+    implementation "android.arch.lifecycle:extensions:${rootProject.arch}"
 }
