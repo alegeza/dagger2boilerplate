@@ -4,8 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.alexfcmkh.dagger2boilerplate.data.mapper.UserModelMapper;
 import com.alexfcmkh.dagger2boilerplate.data.model.UserModel;
 import com.alexfcmkh.dagger2boilerplate.mvp.usecase.UserUseCase;
+import com.alexfcmkh.dagger2boilerplate.ui.model.UserItemModel;
 
 import java.util.List;
 
@@ -17,29 +19,31 @@ import timber.log.Timber;
 public class UserListViewModel extends ViewModel {
 
     private UserUseCase userUseCase;
-    private MutableLiveData<List<UserModel>> usersLiveData;
+    private UserModelMapper mapper;
+    private MutableLiveData<List<UserItemModel>> userModelsLiveData;
 
     @Inject
-    public UserListViewModel(UserUseCase userUseCase) {
+    public UserListViewModel(UserUseCase userUseCase, UserModelMapper mapper) {
         this.userUseCase = userUseCase;
+        this.mapper = mapper;
     }
 
     public void loadUsers() {
         userUseCase.loadUsers().subscribe(this::setUsers, this::logError);
     }
 
-    public LiveData<List<UserModel>> getUsers() {
-        if (usersLiveData == null) {
-            usersLiveData = new MutableLiveData<>();
+    public LiveData<List<UserItemModel>> getUsers() {
+        if (userModelsLiveData == null) {
+            userModelsLiveData = new MutableLiveData<>();
         }
-        return usersLiveData;
+        return userModelsLiveData;
     }
 
     private void setUsers(List<UserModel> users) {
-        if (usersLiveData == null) {
-            usersLiveData = new MutableLiveData<>();
+        if (userModelsLiveData == null) {
+            userModelsLiveData = new MutableLiveData<>();
         }
-        usersLiveData.setValue(users);
+        userModelsLiveData.setValue(mapper.transform(users));
     }
 
     private void logError(Throwable throwable) {

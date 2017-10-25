@@ -24,6 +24,8 @@ ext {
     timber = "4.5.1"
     rxjava = "2.1.5"
     rxandroid = "2.0.1"
+    butterknife = "8.8.1"
+    rendererRecyclerViewAdapter = "1.2.4"
 }
 
 allprojects {

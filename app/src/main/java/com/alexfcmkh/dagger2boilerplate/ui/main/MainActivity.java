@@ -1,21 +1,20 @@
-package com.alexfcmkh.dagger2boilerplate.ui;
+package com.alexfcmkh.dagger2boilerplate.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
 import com.alexfcmkh.dagger2boilerplate.R;
-import com.alexfcmkh.dagger2boilerplate.data.model.UserModel;
 import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.UserListViewModel;
 import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.factory.ViewModelProviderFactory;
+import com.alexfcmkh.dagger2boilerplate.ui.base.RecyclerViewActivity;
+import com.alexfcmkh.dagger2boilerplate.ui.model.UserItemModel;
+import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.android.support.DaggerAppCompatActivity;
-import timber.log.Timber;
-
-public class MainActivity extends DaggerAppCompatActivity {
+public class MainActivity extends RecyclerViewActivity {
 
     @Inject
     ViewModelProviderFactory viewModelProviderFactory;
@@ -28,14 +27,16 @@ public class MainActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(UserListViewModel.class);
-
         viewModel.getUsers().observe(this, this::setUsers);
-
         viewModel.loadUsers();
     }
 
+    @Override
+    protected void registerRenderers(RendererRecyclerViewAdapter rendererRecyclerViewAdapter) {
+//        rendererRecyclerViewAdapter.registerRenderer(new UsersViewRenderer(UserItemModel.USER_LIST_ITEM_TYPE, this));
+    }
 
-    private void setUsers(List<UserModel> userModels) {
-        Timber.log(1, "Count of users " + userModels.size());
+    private void setUsers(List<UserItemModel> userModels) {
+//        setItems(userModels);
     }
 }

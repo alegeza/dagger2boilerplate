@@ -1,6 +1,6 @@
 package com.alexfcmkh.dagger2boilerplate.di.module;
 
-import com.alexfcmkh.dagger2boilerplate.ui.MainActivity;
+import com.alexfcmkh.dagger2boilerplate.ui.main.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
