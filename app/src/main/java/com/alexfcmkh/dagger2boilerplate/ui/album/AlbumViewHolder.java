@@ -1,4 +1,4 @@
-package com.alexfcmkh.dagger2boilerplate.ui.main;
+package com.alexfcmkh.dagger2boilerplate.ui.album;
 
 import android.view.View;
 import android.widget.TextView;
@@ -9,12 +9,12 @@ import com.alexfcmkh.dagger2boilerplate.ui.base.BaseViewHolder;
 import butterknife.BindView;
 
 
-class UserViewHolder extends BaseViewHolder {
+class AlbumViewHolder extends BaseViewHolder {
 
-    @BindView(R.id.user_name)
-    TextView tvUserName;
+    @BindView(R.id.album_name)
+    TextView tvAlbumName;
 
-    UserViewHolder(View itemView) {
+    AlbumViewHolder(View itemView) {
         super(itemView);
     }
 }

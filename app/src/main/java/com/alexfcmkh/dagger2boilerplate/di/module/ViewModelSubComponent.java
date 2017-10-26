@@ -1,5 +1,7 @@
 package com.alexfcmkh.dagger2boilerplate.di.module;
 
+import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.AlbumsListViewModel;
+import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.PhotoGridViewModel;
 import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.UserListViewModel;
 
 import dagger.Subcomponent;
@@ -13,4 +15,8 @@ public interface ViewModelSubComponent {
     }
 
     UserListViewModel userListViewModel();
+
+    AlbumsListViewModel albumListViewModel();
+
+    PhotoGridViewModel photoGridViewModel();
 }

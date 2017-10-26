@@ -20,6 +20,6 @@ public class UserUseCase extends BaseUseCase<List<UserModel>> {
     }
 
     public Single<List<UserModel>> loadUsers() {
-        return execute(repository.getAllData());
+        return execute(repository.getAllData(null));
     }
 }

@@ -7,12 +7,20 @@ import com.github.vivchar.rendererrecyclerviewadapter.ItemModel;
 public class UserItemModel implements ItemModel {
 
 
-    public static final int USER_LIST_ITEM_TYPE =1;
+    public static final int USER_LIST_ITEM_TYPE = 1;
 
-    private UserModel userModel;
+    private final UserModel userModel;
 
     public UserItemModel(UserModel item) {
         this.userModel = item;
+    }
+
+    public int getUserId(){
+        return userModel.getId();
+    }
+
+    public String getUserName() {
+        return userModel.getName();
     }
 
     @Override

@@ -26,6 +26,7 @@ ext {
     rxandroid = "2.0.1"
     butterknife = "8.8.1"
     rendererRecyclerViewAdapter = "1.2.4"
+    picasso = "2.5.2"
 }
 
 allprojects {

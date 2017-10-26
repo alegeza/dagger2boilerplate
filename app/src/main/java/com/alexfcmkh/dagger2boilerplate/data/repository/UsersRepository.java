@@ -1,6 +1,9 @@
 package com.alexfcmkh.dagger2boilerplate.data.repository;
 
+import android.support.annotation.Nullable;
+
 import com.alexfcmkh.dagger2boilerplate.data.model.UserModel;
+import com.alexfcmkh.dagger2boilerplate.data.repository.query.request.Query;
 import com.alexfcmkh.dagger2boilerplate.data.retrofit.UserApi;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public class UsersRepository implements IBaseRepository<UserModel> {
     }
 
     @Override
-    public Single<List<UserModel>> getAllData() {
+    public Single<List<UserModel>> getAllData(@Nullable Query query) {
         return api.loadUsers();
     }
 }
