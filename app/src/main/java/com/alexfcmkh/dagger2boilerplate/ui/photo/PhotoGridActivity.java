@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.PhotoGridViewModel;
 import com.alexfcmkh.dagger2boilerplate.ui.base.RecyclerViewActivity;
 import com.alexfcmkh.dagger2boilerplate.ui.model.PhotoItemModel;
+import com.f2prateek.dart.InjectExtra;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class PhotoGridActivity extends RecyclerViewActivity {
     private static final String EXTRA_ALBUM_ID = "com.alexfcmkh.dagger2boilerplate.extra.ALBUM_ID";
 
     PhotoGridViewModel viewModel;
+
+    @InjectExtra(EXTRA_ALBUM_ID)
+    int albumId;
 
     public static Intent createStartIntent(Context context, int albumId) {
         Intent intent = new Intent(context, PhotoGridActivity.class);
@@ -33,7 +37,8 @@ public class PhotoGridActivity extends RecyclerViewActivity {
 
         viewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(PhotoGridViewModel.class);
         viewModel.getPhotosLiveData().observe(this, this::setPhotos);
-        viewModel.loadPhotos(getIntent().getIntExtra(EXTRA_ALBUM_ID, 0));
+        viewModel.getLoadingProgressLiveData().observe(this, this::toggleProgressView);
+        viewModel.loadPhotos(albumId);
     }
 
     private void setPhotos(List<PhotoItemModel> photoItemModels) {
@@ -41,7 +46,7 @@ public class PhotoGridActivity extends RecyclerViewActivity {
     }
 
     @Override
-    protected void createItemDecorator(RecyclerView recyclerView) {
+    protected void setupItemDecorator(RecyclerView recyclerView) {
         recyclerView.removeItemDecoration(recyclerView.getItemDecorationAt(0));
     }
 

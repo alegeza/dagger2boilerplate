@@ -49,14 +49,14 @@ public abstract class RecyclerViewActivity extends BaseActivity implements Swipe
 
         recyclerView.setLayoutManager(createLayoutManager());
         recyclerView.setAdapter(rendererRecyclerViewAdapter);
-        createItemDecorator(recyclerView);
+        setupItemDecorator(recyclerView);
     }
 
     protected RecyclerView.LayoutManager createLayoutManager() {
         return new LinearLayoutManager(this);
     }
 
-    protected void createItemDecorator(RecyclerView recyclerView) {
+    protected void setupItemDecorator(RecyclerView recyclerView) {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 

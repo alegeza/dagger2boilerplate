@@ -7,11 +7,11 @@ import com.alexfcmkh.dagger2boilerplate.util.NetworkInteractor;
 
 import io.reactivex.Single;
 
-public abstract class NetworkUseCase<T> extends BaseUseCase<T> {
+abstract class NetworkUseCase<T> extends BaseUseCase<T> {
 
     private NetworkInteractor networkInteractor;
 
-    public NetworkUseCase(NetworkInteractor networkInteractor) {
+    NetworkUseCase(NetworkInteractor networkInteractor) {
         this.networkInteractor = networkInteractor;
     }
 

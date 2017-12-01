@@ -8,14 +8,16 @@ import android.os.Bundle;
 import com.alexfcmkh.dagger2boilerplate.mvp.viewmodel.AlbumsListViewModel;
 import com.alexfcmkh.dagger2boilerplate.ui.base.RecyclerViewActivity;
 import com.alexfcmkh.dagger2boilerplate.ui.model.AlbumItemModel;
+import com.f2prateek.dart.InjectExtra;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
 
 public class AlbumListActivity extends RecyclerViewActivity {
 
     private static final String EXTRA_USER_ID = "com.alexfcmkh.dagger2boilerplate.extra.USER_ID";
-
-    AlbumsListViewModel albumsListViewModel;
+    @InjectExtra(EXTRA_USER_ID)
+    int userId;
+    private AlbumsListViewModel albumsListViewModel;
 
     public static Intent createStartIntent(Context context, int userId) {
         Intent intent = new Intent(context, AlbumListActivity.class);
@@ -28,8 +30,9 @@ public class AlbumListActivity extends RecyclerViewActivity {
         super.onCreate(savedInstanceState);
 
         albumsListViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AlbumsListViewModel.class);
-        albumsListViewModel.setUserId(getIntent().getIntExtra(EXTRA_USER_ID, 0));
+        albumsListViewModel.setUserId(userId);
         albumsListViewModel.getAlbums().observe(this, this::setItems);
+        albumsListViewModel.getLoadingProgressLiveData().observe(this, this::toggleProgressView);
         albumsListViewModel.loadAlbums();
     }
 

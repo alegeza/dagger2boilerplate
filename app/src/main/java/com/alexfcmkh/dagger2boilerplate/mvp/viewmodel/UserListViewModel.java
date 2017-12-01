@@ -23,7 +23,7 @@ public class UserListViewModel extends BaseViewModel {
     private MutableLiveData<List<UserItemModel>> userModelsLiveData;
 
     @Inject
-    public UserListViewModel(UserUseCase userUseCase, UserModelMapper mapper) {
+    UserListViewModel(UserUseCase userUseCase, UserModelMapper mapper) {
         this.userUseCase = userUseCase;
         this.mapper = mapper;
     }

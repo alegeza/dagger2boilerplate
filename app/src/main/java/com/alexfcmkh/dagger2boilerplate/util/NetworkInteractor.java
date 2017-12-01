@@ -14,6 +14,7 @@ public class NetworkInteractor {
 
     public boolean isNetworkAvailable() {
         NetworkInfo activeNetwork = this.connectivityManager.getActiveNetworkInfo();
-        return activeNetwork.isConnectedOrConnecting();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
+
 }

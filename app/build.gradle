@@ -10,6 +10,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -47,11 +52,14 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofit}"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.loggingInterceptor}"
     /** Timber - library for logging **/
     implementation "com.jakewharton.timber:timber:${rootProject.timber}"
     /** lifecycle components **/
     implementation "android.arch.lifecycle:extensions:${rootProject.arch}"
+
+    /** Dart - injection of extras*/
+    compile "com.f2prateek.dart:dart:${rootProject.dart}"
 
     implementation "com.jakewharton:butterknife:${rootProject.butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterknife}"

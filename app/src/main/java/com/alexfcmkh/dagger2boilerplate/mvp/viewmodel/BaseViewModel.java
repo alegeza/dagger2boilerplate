@@ -5,8 +5,8 @@ import android.arch.lifecycle.ViewModel;
 
 public class BaseViewModel extends ViewModel {
 
-    protected MutableLiveData<Boolean> loadingProgressLiveData;
-    protected MutableLiveData<String> infoMessageLiveData;
+    private MutableLiveData<Boolean> loadingProgressLiveData;
+    private MutableLiveData<String> infoMessageLiveData;
 
     public MutableLiveData<Boolean> getLoadingProgressLiveData() {
         if (loadingProgressLiveData == null) {
