@@ -29,8 +29,7 @@ public class PhotoGridViewModel extends ViewModel {
 
     public void loadPhotos(int albumId) {
         loadPhotosUseCase.getAllPhotos(albumId)
-                .subscribe(this::setPhotos, throwable -> {
-                });
+                .subscribe(this::setPhotos, throwable -> System.out.println());
 
     }
 

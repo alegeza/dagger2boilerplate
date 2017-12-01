@@ -1,9 +1,12 @@
 package com.alexfcmkh.dagger2boilerplate.di.module;
 
+import android.content.Context;
+
 import com.alexfcmkh.dagger2boilerplate.BuildConfig;
 import com.alexfcmkh.dagger2boilerplate.data.retrofit.AlbumApi;
 import com.alexfcmkh.dagger2boilerplate.data.retrofit.PhotoApi;
 import com.alexfcmkh.dagger2boilerplate.data.retrofit.UserApi;
+import com.alexfcmkh.dagger2boilerplate.util.NetworkInteractor;
 
 import javax.inject.Singleton;
 
@@ -57,5 +60,11 @@ public class AppModule {
     @Singleton
     PhotoApi providePhotoApi(Retrofit retrofit) {
         return retrofit.create(PhotoApi.class);
+    }
+
+    @Provides
+    @Singleton
+    NetworkInteractor provideNetworkInteractor(Context context) {
+        return new NetworkInteractor(context);
     }
 }
